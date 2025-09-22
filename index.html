@@ -261,4 +261,12 @@ function sendToWhatsApp(e){
   setTimeout(()=>{popup.style.display='none';orderForm.style.display='none';window.scrollTo({top:0,behavior:'smooth'});},3000);
 }
 
-/* search
+/* search filter */
+function searchProducts(query){
+  query=query.toLowerCase();
+  const filtered=PRODUCTS.filter(p=>p.name.toLowerCase().includes(query));
+  renderProducts(filtered);
+}
+</script>
+</body>
+</html>
