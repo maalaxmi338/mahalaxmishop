@@ -1,272 +1,198 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mahalaxmi Wholesaler</title>
-<style>
-  :root{
-    --green:#2874f0; 
-    --dark:#222;
-    --card-bg:#fff;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:"Segoe UI",Roboto,Arial,sans-serif;background:#f1f3f6;color:#222;}
-
-  /* header */
-  header{
-    background:var(--green);
-    color:#fff;
-    padding:10px 14px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    position:sticky;
-    top:0;z-index:100;
-  }
-  header h1{font-size:18px;font-weight:700}
-  .search-box{flex:1;margin-left:10px;}
-  .search-box input{width:100%;padding:6px 10px;border:none;border-radius:4px;font-size:14px;}
-
-  /* banner slider */
-  .banner{background:#fff;margin:8px;border-radius:8px;overflow:hidden;
-    box-shadow:0 2px 6px rgba(0,0,0,0.08);position:relative;max-height:180px;}
-  .slider{width:100%;overflow:hidden;border-radius:8px;position:relative;}
-  .slides{display:flex;width:200%;animation:slide 8s infinite;}
-  .slides img{width:100%;height:180px;flex-shrink:0;object-fit:cover}
-  @keyframes slide {
-    0%{transform:translateX(0%)}40%{transform:translateX(0%)}50%{transform:translateX(-100%)}
-    90%{transform:translateX(-100%)}100%{transform:translateX(0%)}
-  }
-  .banner-text{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.6);color:#fff;
-    padding:6px 10px;border-radius:6px;font-size:14px;font-weight:600;}
-
-  /* Hot Deals */
-  .hot-deals{background:#fff;margin:8px;padding:10px;border-radius:8px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.08);}
-  .hot-deals h2{font-size:16px;margin-bottom:10px;color:#d32f2f}
-  .deal-items{display:flex;overflow-x:auto;gap:10px;}
-  .deal-card{min-width:140px;background:#fff;border:1px solid #eee;border-radius:6px;
-    text-align:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);padding:6px;}
-  .deal-card img{width:100%;height:120px;object-fit:cover;border-radius:4px}
-  .deal-card h4{font-size:14px;margin:4px 0;color:#333}
-  .deal-price{color:#388e3c;font-weight:600;font-size:13px}
-
-  /* products */
-  .container{padding:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
-  .card{background:var(--card-bg);border-radius:8px;overflow:hidden;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);text-align:center;transition:.2s;cursor:pointer;}
-  .card img{width:100%;height:140px;object-fit:cover}
-  h3{font-size:15px;margin:6px 0;color:#333}
-  .price{color:#388e3c;font-weight:600;font-size:14px;margin-bottom:6px}
-  .btn{background:var(--green);color:#fff;border:none;padding:8px 10px;border-radius:4px;
-    font-size:14px;margin-bottom:8px;cursor:pointer;}
-  .btn:active{transform:scale(.97)}
-
-  /* product detail popup */
-  #productPopup{display:none;position:fixed;top:0;left:0;right:0;bottom:0;
-    background:rgba(0,0,0,0.6);z-index:9999;justify-content:center;align-items:center;}
-  .popup-content{background:#fff;border-radius:10px;max-width:400px;width:90%;padding:16px;
-    text-align:center;box-shadow:0 6px 20px rgba(0,0,0,0.25);animation:zoomIn .3s ease;}
-  .popup-content img{width:100%;max-height:250px;object-fit:cover;border-radius:6px}
-  .popup-content h3{margin:10px 0;color:#222}
-  .popup-content .price{margin:6px 0;font-size:16px}
-  .close-btn{background:#f44336;color:#fff;border:none;padding:6px 12px;border-radius:4px;
-    cursor:pointer;margin-top:8px}
-  @keyframes zoomIn{from{transform:scale(0.7);opacity:0}to{transform:scale(1);opacity:1}}
-
-  /* order form */
-  #orderForm{display:none;max-width:420px;margin:14px auto 30px;background:#fff;
-    border-radius:8px;padding:16px;box-shadow:0 6px 20px rgba(0,0,0,0.15)}
-  #orderForm h2{color:var(--green);text-align:center;margin-bottom:10px}
-  input,select,textarea{width:100%;padding:10px;margin:6px 0;border-radius:6px;
-    border:1px solid #ddd;font-size:14px}
-  .row{display:flex;gap:6px}.row>*{flex:1}
-  .tot{background:#f9fffb;border:1px dashed #bff0c9;padding:8px;border-radius:6px;margin-top:6px}
-  .upi-box{display:flex;justify-content:center;margin-top:8px}
-  .upi-box img{width:130px;border-radius:6px;box-shadow:0 4px 10px rgba(0,0,0,0.08)}
-
-  footer{background:#fff;color:#555;text-align:center;padding:12px;font-size:13px;
-    margin-top:20px;border-top:1px solid #ddd}
-
-  /* success popup */
-  #successPopup{display:none;position:fixed;top:0;left:0;right:0;bottom:0;
-    background:rgba(0,0,0,0.4);z-index:9999;justify-content:center;align-items:center;}
-  .popup-box{background:#d4edda;color:#155724;padding:20px 30px;border-radius:10px;
-    font-size:18px;font-weight:bold;box-shadow:0 4px 12px rgba(0,0,0,0.2);animation:zoomIn .3s ease;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhonePe Scratch Card</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+    }
+    .header {
+      background: #6c2dc7;
+      color: white;
+      padding: 10px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .banner {
+      background: purple;
+      color: #fff;
+      font-weight: bold;
+      padding: 8px;
+    }
+    .card {
+      margin: 20px auto;
+      width: 300px;
+      height: 200px;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    }
+    .prize {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: #222;
+    }
+    #scratchCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .btn {
+      display: inline-block;
+      background: purple;
+      color: #fff;
+      padding: 12px 18px;
+      margin-top: 15px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+    }
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>Mahalaxmi</h1>
-  <div class="search-box"><input type="text" placeholder="Search for products" oninput="searchProducts(this.value)" /></div>
-</header>
-
-<!-- Banner Slider -->
-<div class="banner">
-  <div class="slider">
-    <div class="slides">
-      <img src="https://i.ibb.co/wN3nDRBm/Blog-Banner-250524-Lines-sarees-Chinaya-Banaras-2.jpg" alt="Saree Banner 1">
-      <img src="https://i.ibb.co/R4JLWk5k/1.jpg" alt="Saree Banner 2">
-    </div>
-    <div class="banner-text">Explore Sarees, Linen & Cotton</div>
+  <div class="header">
+    <h1>📱 PhonePe</h1>
+    <div>UNLIMITED CASHBACK - जीतें ₹1999 तक</div>
   </div>
-</div>
 
-<!-- Hot Deals -->
-<div class="hot-deals">
-  <h2>🔥 Hot Deals</h2>
-  <div class="deal-items" id="hotDeals"></div>
-</div>
-
-<!-- Products -->
-<div class="container" id="products"></div>
-
-<!-- Product Detail Popup -->
-<div id="productPopup">
-  <div class="popup-content">
-    <img id="popupImg" src="" alt="product">
-    <h3 id="popupName"></h3>
-    <div class="price" id="popupPrice"></div>
-    <button class="btn" id="popupBuyBtn">Buy Now</button>
-    <button class="close-btn" onclick="closePopup()">Close</button>
+  <div class="card">
+    <div class="prize" id="prizeText">🎉 You Won ₹1996 🎉</div>
+    <canvas id="scratchCanvas" width="300" height="200"></canvas>
   </div>
-</div>
 
-<!-- Order form -->
-<div id="orderForm">
-  <h2>Order Details</h2>
-  <form id="form" onsubmit="sendToWhatsApp(event)">
-    <label>Product</label>
-    <input id="productInput" type="text" readonly />
-    <div class="row"><input id="name" type="text" placeholder="पूरा नाम" required />
-      <input id="mobile" type="tel" placeholder="मोबाइल नंबर" required /></div>
-    <textarea id="address" placeholder="पूरा पता (Village/City/Pin)" rows="3" required></textarea>
-    <div class="row"><input id="pricePer" type="number" readonly />
-      <input id="quantity" type="number" min="1" value="1" required /></div>
-    <div class="tot">कुल ₹: <span id="total">0</span></div>
-    <label style="margin-top:8px">Payment</label>
-    <select id="payment" onchange="toggleUPI(this.value)" required>
-      <option value="">-- Payment method चुनें --</option>
-      <option value="UPI">UPI</option>
-      <option value="Cash on Delivery">Cash on Delivery</option>
-    </select>
-    <div id="upiSection" style="display:none">
-      <p style="text-align:center; margin:6px 0">UPI ID: <b>yadavsandip4229-1@okicici</b></p>
-      <div class="upi-box"><img src="https://i.ibb.co/zVfLpD1v/Google-Pay-QR-1.png" alt="UPI QR"></div>
-    </div>
-    <button class="btn" type="submit" style="width:100%; margin-top:12px">Confirm & Send to WhatsApp</button>
-  </form>
-</div>
+  <button class="btn">Send Prize Money In Bank</button>
 
-<!-- Success Popup -->
-<div id="successPopup"><div class="popup-box">✅ Order Placed Successfully!</div></div>
-
-<footer>© 2025 Mahalaxmi Wholesaler • Shakuntala Nagar, Nawada • 📞 7091723553</footer>
+  <canvas class="confetti" id="confettiCanvas"></canvas>
 
 <script>
-const PRODUCTS = [
-  { id:5, name:'Yellow lilen', price:699, img:'https://i.ibb.co/XkpzW4FQ/61z-Msh-K4q0-L-AC-UY1100-FMwebp.webp' },
-  { id:6, name:'Black Premium lilen', price:699, img:'https://i.ibb.co/rfLMLBXY/61b-P0f-PBu-JL-AC-UF894-1000-QL80-FMwebp.webp' },
-  { id:7, name:'Pure White lilen', price:699, img:'https://i.ibb.co/PZTBn9Db/61-Gq-FNpr1d-L-AC-UY1100-FMwebp-1.webp' },
-  { id:8, name:'Banarasi Silk Saree', price:1599, img:'https://i.ibb.co/vCgfKbDc/IMG-20250918-WA0093.jpg' },
-  { id:9, name:'Kanjivaram Saree', price:1899, img:'https://i.ibb.co/ycPXzXhs/IMG-20250918-WA0092.jpg' },
-  { id:10, name:'Printed Georgette Saree', price:999, img:'https://i.ibb.co/MkYCRzTW/IMG-20250918-WA0091.jpg' },
-  { id:11, name:'Wedding Bridal Saree', price:2499, img:'https://i.ibb.co/BHjDqG9r/IMG-20250918-WA0030.jpg' },
-  { id:12, name:'Cotton Handloom Saree', price:1199, img:'https://i.ibb.co/QvfgSw90/IMG-20250918-WA0089.jpg' },
-  { id:13, name:'Designer Partywear Saree', price:1699, img:'https://i.ibb.co/Kjh0LFWX/IMG-20250918-WA0027.jpg' },
-  { id:14, name:'Soft Linen Saree', price:1399, img:'https://i.ibb.co/zT74rdkN/IMG-20250918-WA0088.jpg' },
-  { id:15, name:'Daily Wear Saree', price:799, img:'https://i.ibb.co/twcDSJsS/IMG-20250918-WA0007.jpg' },
-  { id:16, name:'Fancy Embroidery Saree', price:1499, img:'https://i.ibb.co/1f7LxWNk/IMG-20250918-WA0055.jpg' },
-  { id:17, name:'Classic Chiffon Saree', price:1299, img:'https://i.ibb.co/zdV8HqW/IMG-20250918-WA0003.jpg' }
-];
-const productsEl=document.getElementById('products');
-const hotDealsEl=document.getElementById('hotDeals');
-const orderForm=document.getElementById('orderForm');
-const productInput=document.getElementById('productInput');
-const pricePer=document.getElementById('pricePer');
-const qtyEl=document.getElementById('quantity');
-const totalEl=document.getElementById('total');
-const upiSection=document.getElementById('upiSection');
+  // SCRATCH CARD
+  const canvas = document.getElementById("scratchCanvas");
+  const ctx = canvas.getContext("2d");
+  const prizeText = document.getElementById("prizeText");
 
-function renderProducts(list=PRODUCTS){
-  productsEl.innerHTML='';
-  list.forEach(p=>{
-    const div=document.createElement('div');
-    div.className='card';
-    div.innerHTML=`<img src="${p.img}" alt="${p.name}" onclick="showPopup(${p.id})">
-      <h3>${p.name}</h3><div class="price">₹${p.price}</div>
-      <button class="btn" onclick="openForm(${p.id})">Buy Now</button>`;
-    productsEl.appendChild(div);
-  });
-}
-renderProducts();
+  let isDrawing = false;
 
-function renderHotDeals(){
-  const deals=[PRODUCTS[7],PRODUCTS[9],PRODUCTS[11]]; // कुछ random hot deals
-  hotDealsEl.innerHTML='';
-  deals.forEach(p=>{
-    const d=document.createElement('div');
-    d.className='deal-card';
-    d.innerHTML=`<img src="${p.img}" alt="${p.name}" onclick="showPopup(${p.id})">
-      <h4>${p.name}</h4><div class="deal-price">₹${p.price}</div>`;
-    hotDealsEl.appendChild(d);
-  });
-}
-renderHotDeals();
+  function init() {
+    ctx.fillStyle = "#999";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#fff";
+    ctx.font = "20px Arial";
+    ctx.fillText("Scratch Here", 90, 100);
+  }
 
-/* product popup */
-function showPopup(id){
-  const p=PRODUCTS.find(x=>x.id===id);
-  document.getElementById('popupImg').src=p.img;
-  document.getElementById('popupName').textContent=p.name;
-  document.getElementById('popupPrice').textContent=`₹${p.price}`;
-  document.getElementById('popupBuyBtn').onclick=()=>{closePopup();openForm(p.id)};
-  document.getElementById('productPopup').style.display='flex';
-}
-function closePopup(){document.getElementById('productPopup').style.display='none';}
+  function getPosition(e) {
+    const rect = canvas.getBoundingClientRect();
+    if (e.touches) {
+      return {
+        x: e.touches[0].clientX - rect.left,
+        y: e.touches[0].clientY - rect.top
+      };
+    } else {
+      return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    }
+  }
 
-function openForm(id){
-  const p=PRODUCTS.find(x=>x.id===id);
-  productInput.value=`${p.name} - ₹${p.price}`;
-  pricePer.value=p.price;qtyEl.value=1;calcTotal();
-  upiSection.style.display='none';orderForm.style.display='block';
-  window.scrollTo({top:orderForm.offsetTop-10,behavior:'smooth'});
-}
+  function scratch(e) {
+    if (!isDrawing) return;
+    const pos = getPosition(e);
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, 20, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
-function calcTotal(){
-  const price=Number(pricePer.value)||0;
-  const qty=Number(qtyEl.value)||1;
-  totalEl.textContent=(price*qty).toFixed(0);
-}
-qtyEl.addEventListener('input',calcTotal);
+  canvas.addEventListener("mousedown", () => isDrawing = true);
+  canvas.addEventListener("mouseup", () => { isDrawing = false; checkScratch(); });
+  canvas.addEventListener("mousemove", scratch);
 
-function toggleUPI(v){upiSection.style.display=(v==='UPI')?'block':'none'}
+  canvas.addEventListener("touchstart", () => isDrawing = true);
+  canvas.addEventListener("touchend", () => { isDrawing = false; checkScratch(); });
+  canvas.addEventListener("touchmove", scratch);
 
-function sendToWhatsApp(e){
-  e.preventDefault();
-  const name=encodeURIComponent(document.getElementById('name').value.trim());
-  const mobile=encodeURIComponent(document.getElementById('mobile').value.trim());
-  const address=encodeURIComponent(document.getElementById('address').value.trim());
-  const qty=encodeURIComponent(qtyEl.value);
-  const product=encodeURIComponent(productInput.value);
-  const payment=encodeURIComponent(document.getElementById('payment').value);
-  if(!name||!mobile||!address||!qty||!product||!payment){alert('कृपया सारे फील्ड भरें।');return;}
-  const message=`🧾 New Order\n\n📦 Product: ${product}\n📏 Quantity: ${qty}\n👤 Name: ${name}\n📞 Mobile: ${mobile}\n🏠 Address: ${address}\n💳 Payment: ${payment}\n💰 Total: ₹${totalEl.textContent}`;
-  const url=`https://wa.me/919142304374?text=${encodeURIComponent(message)}`;
-  window.open(url,'_blank');
-  const popup=document.getElementById('successPopup');
-  popup.style.display='flex';
-  setTimeout(()=>{popup.style.display='none';orderForm.style.display='none';window.scrollTo({top:0,behavior:'smooth'});},3000);
-}
+  function checkScratch() {
+    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let cleared = 0;
+    for (let i = 3; i < pixels.length; i += 4) {
+      if (pixels[i] === 0) cleared++;
+    }
+    if (cleared > pixels.length / 2) {
+      launchConfetti();
+    }
+  }
 
-/* search filter */
-function searchProducts(query){
-  query=query.toLowerCase();
-  const filtered=PRODUCTS.filter(p=>p.name.toLowerCase().includes(query));
-  renderProducts(filtered);
-}
+  init();
+
+  // CONFETTI
+  const confettiCanvas = document.getElementById("confettiCanvas");
+  const confettiCtx = confettiCanvas.getContext("2d");
+  confettiCanvas.width = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
+
+  const pieces = [];
+  for (let i = 0; i < 150; i++) {
+    pieces.push({
+      x: Math.random() * confettiCanvas.width,
+      y: Math.random() * confettiCanvas.height,
+      w: 8,
+      h: 14,
+      color: `hsl(${Math.random()*360},100%,50%)`,
+      speed: Math.random() * 3 + 2
+    });
+  }
+
+  function drawConfetti() {
+    confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    pieces.forEach(p => {
+      confettiCtx.fillStyle = p.color;
+      confettiCtx.fillRect(p.x, p.y, p.w, p.h);
+    });
+  }
+
+  function updateConfetti() {
+    pieces.forEach(p => {
+      p.y += p.speed;
+      if (p.y > confettiCanvas.height) {
+        p.y = -10;
+        p.x = Math.random() * confettiCanvas.width;
+      }
+    });
+  }
+
+  function loop() {
+    drawConfetti();
+    updateConfetti();
+    requestAnimationFrame(loop);
+  }
+
+  function launchConfetti() {
+    loop();
+  }
 </script>
 </body>
 </html>
