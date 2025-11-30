@@ -4,120 +4,205 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flipkart Clone</title>
+
 <style>
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f2f2f2;
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f1f3f6;
 }
 
-/* Top Blue Header */
-.header {
-    background: #007bdb;
-    padding: 12px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/* Top Header */
+.header{
+    background:#007bdb;
+    padding:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.header img{
+    height:32px;
+}
+.cart{
+    font-size:25px;
+    color:white;
 }
 
-.header img {
-    height: 30px;
+/* Search Bar */
+.search{
+    padding:10px;
+    background:white;
+    display:flex;
+    justify-content:center;
+}
+.search input{
+    width:90%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
 }
 
-.cart {
-    font-size: 22px;
-    margin-right: 10px;
+/* Category Icons */
+.categories{
+    background:white;
+    display:flex;
+    padding:10px 5px;
+    overflow-x:auto;
+    gap:25px;
 }
-
-/* Search Box */
-.search {
-    padding: 10px;
-    background: white;
-    display: flex;
-    justify-content: center;
+.categories div{
+    text-align:center;
+    font-size:13px;
+    color:#333;
 }
-
-.search input {
-    width: 90%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-/* Category Icons Scroll */
-.categories {
-    background: white;
-    padding: 10px;
-    display: flex;
-    overflow-x: auto;
-    gap: 18px;
-}
-
-.categories div {
-    text-align: center;
-    font-size: 13px;
-}
-
-.categories img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.categories img{
+    width:55px;
+    height:55px;
+    border-radius:50%;
 }
 
 /* Banner */
-.banner img {
-    width: 100%;
+.banner img{
+    width:100%;
 }
 
-/* Deal of the Day */
-.deals {
-    text-align: center;
-    padding: 15px;
+/* Deals Section */
+.deals{
+    text-align:center;
+    padding:15px;
+    background:white;
+    margin-top:10px;
+}
+.timer{
+    color:red;
+    font-size:20px;
+}
+.sale-btn{
+    background:#ff2e2e;
+    padding:8px 15px;
+    color:white;
+    border:none;
+    border-radius:4px;
+    margin-top:10px;
 }
 
-.timer {
-    color: red;
-    font-size: 20px;
+/* Product Grid */
+.products{
+    padding:10px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-.products {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 10px;
+.product{
+    background:white;
+    border-radius:8px;
+    padding:10px;
+    position:relative;
 }
 
-.product {
-    background: white;
-    padding: 10px;
-    border-radius: 8px;
+.like{
+    position:absolute;
+    top:8px;
+    right:8px;
+    font-size:22px;
+    color:#ccc;
 }
 
-.product img {
-    width: 100%;
+.product img{
+    width:100%;
+    border-radius:5px;
+    margin-bottom:10px;
 }
 
-.like {
-    font-size: 20px;
-    text-align: right;
-    color: #ccc;
+.brand{
+    font-size:14px;
+    color:#666;
 }
-
-.brand {
-    font-size: 14px;
-    color: #555;
+.name{
+    font-size:16px;
+    font-weight:bold;
+    margin-top:3px;
 }
-
-.name {
-    font-size: 16px;
-    font-weight: bold;
+.price{
+    font-size:17px;
+    font-weight:bold;
+    color:#000;
+}
+.old{
+    text-decoration:line-through;
+    color:#666;
+    font-size:14px;
+    margin-left:5px;
+}
+.off{
+    color:green;
+    font-size:14px;
+    margin-left:5px;
+}
+.assured{
+    width:75px;
+    margin-top:4px;
 }
 
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div cl
+<!-- Top Header -->
+<div class="header">
+    <img src="https://seeklogo.com/images/F/flipkart-logo-3F33927DAA-seeklogo.com.png">
+    <div class="cart">🛒</div>
+</div>
+
+<!-- Search Bar -->
+<div class="search">
+    <input type="text" placeholder="Search for Products, Brands and More">
+</div>
+
+<!-- Category Row -->
+<div class="categories">
+    <div><img src="https://i.imgur.com/9ba8v8K.png"><br>Top Offers</div>
+    <div><img src="https://i.imgur.com/dIGQx7Z.png"><br>Mobiles</div>
+    <div><img src="https://i.imgur.com/q03SgVN.png"><br>Electronics</div>
+    <div><img src="https://i.imgur.com/6WFsFll.png"><br>TVs</div>
+    <div><img src="https://i.imgur.com/hhZVjWN.png"><br>Fashion</div>
+</div>
+
+<!-- Banner -->
+<div class="banner">
+    <img src="https://i.imgur.com/hdmyq3D.jpeg">
+</div>
+
+<!-- Deals Section -->
+<div class="deals">
+    <h2>Deals of the Day</h2>
+    <div class="timer">⏰ 12:34</div>
+    <button class="sale-btn">SALE IS LIVE</button>
+</div>
+
+<!-- Products -->
+<div class="products">
+
+    <div class="product">
+        <div class="like">♡</div>
+        <img src="https://i.imgur.com/2Q0Gooy.png">
+        <div class="brand">OnePlus</div>
+        <div class="name">OnePlus Buds Pro 2</div>
+        <div class="price">₹139 <span class="old">₹13999</span> <span class="off">99% off</span></div>
+        <img class="assured" src="https://i.imgur.com/Q6bZ4Fh.png">
+    </div>
+
+    <div class="product">
+        <div class="like">♡</div>
+        <img src="https://i.imgur.com/V9PZ6Tm.png">
+        <div class="brand">JBL</div>
+        <div class="name">JBL Wave Beam TWS</div>
+        <div class="price">₹129 <span class="old">₹4999</span> <span class="off">99% off</span></div>
+        <img class="assured" src="https://i.imgur.com/Q6bZ4Fh.png">
+    </div>
+
+</div>
+
+</body>
+</html>
