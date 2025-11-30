@@ -1,459 +1,106 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>PhonePe • Scratch Card (Exact)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flipkart Style UI</title>
 <style>
-  :root{
-    --purple1:#6c2dc7;  /* top gradient left */
-    --purple2:#4a1fb0;  /* top gradient right */
-    --accent:#00b7b3;   /* teal-ish used in some image variants */
-    --card-white:#ffffff;
-    --muted:#6b6b6b;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    background: linear-gradient(180deg,#f4f6fb,#eef4ff);
-    -webkit-font-smoothing:antialiased;
-    color:#222;
-  }
+    body{
+        margin:0;
+        font-family:sans-serif;
+        background:#f3f3f3;
+    }
+    /* Top Blue Header */
+    .header{
+        background:#2874F0;
+        color:#fff;
+        padding:12px;
+        display:flex;
+        align-items:center;
+        gap:10px;
+    }
+    .header img{
+        height:26px;
+    }
 
-  /* Top header exactly like image */
-  .topbar{
-    background: linear-gradient(90deg,var(--purple1),var(--purple2));
-    color:#fff;
-    padding:14px 16px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    box-shadow:0 6px 18px rgba(0,0,0,0.10);
-  }
-  .brand-left{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-  }
-  .brand-left .main{
-    font-weight:800;
-    font-size:18px;
-    letter-spacing:0.2px;
-  }
-  .brand-left .sub{
-    font-size:12px;
-    opacity:0.95;
-    font-weight:700;
-  }
-  .brand-right{
-    font-size:13px;
-    opacity:0.95;
-    text-align:right;
-  }
+    /* Search Bar */
+    .search{
+        padding:10px;
+        background:#fff;
+    }
+    .search input{
+        width:100%;
+        padding:10px;
+        font-size:16px;
+        border:1px solid #ccc;
+        border-radius:5px;
+    }
 
-  /* container */
-  .page{
-    max-width:420px;
-    margin:18px auto;
-    padding:0 14px 40px;
-  }
+    /* Categories */
+    .categories{
+        display:flex;
+        overflow-x:auto;
+        background:#fff;
+        padding:10px 0;
+        gap:15px;
+    }
+    .cat-item{
+        text-align:center;
+        min-width:70px;
+        font-size:14px;
+    }
+    .cat-item img{
+        width:50px;
+        height:50px;
+        border-radius:50%;
+    }
 
-  /* promo card background like image */
-  .promo{
-    background: linear-gradient(180deg,#fff,#fff);
-    border-radius:14px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(15,20,40,0.06);
-    border:1px solid rgba(0,0,0,0.04);
-  }
+    /* Banner */
+    .banner img{
+        width:100%;
+        margin-top:10px;
+    }
 
-  /* promo top strip */
-  .promo-top{
-    background: linear-gradient(90deg,var(--accent),#00d1cf);
-    color:#fff;
-    font-weight:800;
-    padding:10px 14px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    letter-spacing:0.6px;
-  }
-  .promo-top .left { font-size:13px; }
-  .promo-top .right { font-size:13px; opacity:0.95; }
+    /* Deals Heading */
+    .deal-title{
+        text-align:center;
+        margin-top:10px;
+        font-size:20px;
+        font-weight:600;
+    }
+    .timer{
+        text-align:center;
+        font-size:18px;
+        color:red;
+        margin-bottom:10px;
+    }
 
-  /* scratch wrap */
-  .scratch-wrap{
-    padding:16px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-  }
-
-  /* card */
-  .card {
-    width:320px;
-    max-width:100%;
-    height:190px;
-    border-radius:12px;
-    position:relative;
-    overflow:hidden;
-    background:linear-gradient(180deg,#fff,#fff);
-    border:1px solid rgba(0,0,0,0.06);
-    box-shadow:0 8px 22px rgba(0,0,0,0.10);
-  }
-
-  /* prize area exact text and layout as in image */
-  .prize-area{
-    position:absolute;
-    inset:0;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:12px;
-    background: linear-gradient(180deg,#fff,#fff);
-  }
-  .prize-area .congrats{
-    font-size:13px;
-    color:#555;
-    font-weight:800;
-    margin-bottom:6px;
-  }
-  .prize-area .won{
-    font-size:14px;
-    font-weight:900;
-    color:#222;
-    margin-bottom:8px;
-    letter-spacing:0.6px;
-  }
-  .prize-area .amount{
-    font-size:36px;
-    font-weight:900;
-    color:var(--purple2);
-    text-shadow:0 6px 18px rgba(76,28,150,0.08);
-  }
-
-  /* scratch overlay */
-  canvas#scratchCanvas{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    display:block;
-    cursor:crosshair;
-    touch-action:none;
-  }
-
-  /* button exactly like image */
-  .actions{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    margin-top:14px;
-  }
-  .btn{
-    width:88%;
-    max-width:320px;
-    background: linear-gradient(90deg,var(--purple2),var(--purple1));
-    color:#fff;
-    border:none;
-    padding:12px 14px;
-    border-radius:10px;
-    font-weight:900;
-    cursor:pointer;
-    box-shadow:0 8px 22px rgba(76,28,150,0.12);
-  }
-
-  .note{
-    text-align:center;
-    color:var(--muted);
-    font-size:12px;
-    margin:12px 8px 18px;
-  }
-
-  /* confetti canvas */
-  canvas#confettiCanvas{
-    position:fixed;
-    left:0;top:0;
-    width:100vw;height:100vh;
-    pointer-events:none;
-    z-index:9999;
-  }
-
-  @media (max-width:360px){
-    .card{height:170px}
-    .prize-area .amount{font-size:30px}
-  }
+    /* Product Cards */
+    .products{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+        padding:10px;
+    }
+    .card{
+        background:#fff;
+        padding:10px;
+        border-radius:8px;
+    }
+    .card img{
+        width:100%;
+        height:150px;
+        object-fit:contain;
+    }
+    .name{
+        font-size:14px;
+        margin-top:5px;
+    }
 </style>
 </head>
 <body>
 
-  <!-- header exactly like image -->
-  <div class="topbar">
-    <div class="brand-left">
-      <div class="main">PhonePe</div>
-      <div class="sub">UNLIMITED CASHBACK — जीतें ₹1999 तक</div>
-    </div>
-    <div class="brand-right">Mahalaxmi • Nawada</div>
-  </div>
-
-  <div class="page">
-    <div class="promo">
-      <div class="promo-top">
-        <div>UNLIMITED CASHBACK</div>
-        <div>LIMITED TIME OFFER</div>
-      </div>
-
-      <div class="scratch-wrap">
-        <div class="card" role="img" aria-label="Scratch Card">
-          <div class="prize-area" id="prizeArea">
-            <!-- exact text from your image — not a single word changed -->
-            <div class="congrats">🎉 Congratulations</div>
-            <div class="won">YOU HAVE WON</div>
-            <div class="amount" id="amountText">₹1996</div>
-          </div>
-
-          <!-- scratch overlay canvas -->
-          <canvas id="scratchCanvas" width="320" height="190"></canvas>
-        </div>
-
-        <div class="actions">
-          <button class="btn" id="bankBtn">Send Prize Money In Bank</button>
-        </div>
-
-        <div class="note">Prize subject to T&C. यह ऑफर सीमित समय के लिए है।</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- confetti canvas -->
-  <canvas id="confettiCanvas"></canvas>
-
-<script>
-/* ================= SCRATCH CARD + CONFETTI (Exact behaviour) ================= */
-const canvas = document.getElementById('scratchCanvas');
-const ctx = canvas.getContext('2d');
-const prizeArea = document.getElementById('prizeArea');
-const amountText = document.getElementById('amountText');
-const confettiCanvas = document.getElementById('confettiCanvas');
-const confettiCtx = confettiCanvas.getContext('2d');
-const bankBtn = document.getElementById('bankBtn');
-
-function fitCanvases(){
-  const card = document.querySelector('.card');
-  const rect = card.getBoundingClientRect();
-  // set canvas pixel size to match element size (for sharpness)
-  canvas.width = Math.round(rect.width);
-  canvas.height = Math.round(rect.height);
-  canvas.style.width = rect.width + 'px';
-  canvas.style.height = rect.height + 'px';
-  confettiCanvas.width = window.innerWidth;
-  confettiCanvas.height = window.innerHeight;
-  drawOverlay();
-}
-window.addEventListener('resize', fitCanvases);
-
-/* draw metallic scratch overlay to match image feel */
-function drawOverlay(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  const g = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
-  g.addColorStop(0,'#cfcfcf');
-  g.addColorStop(0.5,'#b6b6b6');
-  g.addColorStop(1,'#e6e6e6');
-  ctx.fillStyle = g;
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-
-  // light stripes for texture
-  ctx.globalAlpha = 0.12;
-  ctx.fillStyle = '#ffffff';
-  for(let i=0;i<canvas.width;i+=10){
-    ctx.fillRect(i,0,4,canvas.height);
-  }
-  ctx.globalAlpha = 1;
-
-  // label text
-  ctx.fillStyle = '#3a3a3a';
-  ctx.font = Math.max(12, Math.round(canvas.height * 0.12)) + 'px Arial';
-  ctx.textAlign = 'center';
-  ctx.fillText('SCRATCH HERE', canvas.width/2, canvas.height/2 + 6);
-  ctx.globalCompositeOperation = 'source-over';
-}
-
-/* interaction */
-let drawing = false;
-let last = null;
-let revealed = false;
-
-function getPos(e){
-  const rect = canvas.getBoundingClientRect();
-  if(e.touches && e.touches[0]){
-    return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
-  } else {
-    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
-  }
-}
-function start(e){
-  e.preventDefault();
-  drawing = true;
-  last = getPos(e);
-  drawPoint(last);
-}
-function end(e){
-  drawing = false;
-  last = null;
-  setTimeout(checkReveal, 120);
-}
-function move(e){
-  if(!drawing) return;
-  e.preventDefault();
-  const p = getPos(e);
-  eraseLine(last, p);
-  last = p;
-}
-
-function drawPoint(p){
-  if(!p) return;
-  ctx.globalCompositeOperation = 'destination-out';
-  ctx.beginPath();
-  ctx.arc(p.x, p.y, Math.max(18, Math.round(Math.min(canvas.width,canvas.height)*0.06)), 0, Math.PI*2);
-  ctx.fill();
-  ctx.closePath();
-}
-function eraseLine(p1, p2){
-  if(!p1 || !p2) return;
-  ctx.globalCompositeOperation = 'destination-out';
-  ctx.beginPath();
-  ctx.moveTo(p1.x, p1.y);
-  ctx.lineTo(p2.x, p2.y);
-  ctx.lineWidth = Math.max(36, Math.round(Math.min(canvas.width,canvas.height)*0.12));
-  ctx.lineCap = 'round';
-  ctx.stroke();
-  ctx.closePath();
-}
-
-/* events */
-canvas.addEventListener('mousedown', start);
-canvas.addEventListener('touchstart', start, {passive:false});
-window.addEventListener('mousemove', move);
-window.addEventListener('touchmove', move, {passive:false});
-window.addEventListener('mouseup', end);
-window.addEventListener('touchend', end);
-
-/* reveal condition */
-function checkReveal(){
-  if(revealed) return;
-  try{
-    const img = ctx.getImageData(0,0,canvas.width,canvas.height);
-    const data = img.data;
-    let cleared = 0;
-    for(let i=3;i<data.length;i+=4){
-      if(data[i] === 0) cleared++;
-    }
-    const total = canvas.width * canvas.height;
-    if((cleared/total) > 0.38){ // ~38%
-      revealed = true;
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      triggerWin();
-    }
-  }catch(e){
-    // if any issue, just reveal
-    revealed = true;
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    triggerWin();
-  }
-}
-
-/* small pop animation & confetti */
-function triggerWin(){
-  // pop effect
-  prizeArea.style.transition = 'transform 0.45s cubic-bezier(.2,.9,.3,1)';
-  prizeArea.style.transform = 'scale(1.06)';
-  setTimeout(()=> prizeArea.style.transform = 'scale(1)', 450);
-  // start confetti
-  startConfetti();
-}
-
-/* ===== confetti implementation ===== */
-let pieces = [];
-let running = false;
-let rafId;
-
-function spawnConfetti(){
-  pieces = [];
-  const colors = ['#ff3b30','#ffb400','#00b894','#0984e3','#6c2dc7','#00b7b3','#ff7675'];
-  const count = Math.max(80, Math.round(window.innerWidth / 8));
-  for(let i=0;i<count;i++){
-    pieces.push({
-      x: Math.random()*confettiCanvas.width,
-      y: -Math.random()*confettiCanvas.height,
-      w: 6 + Math.random()*12,
-      h: 8 + Math.random()*12,
-      rotation: Math.random()*360,
-      speedY: 2 + Math.random()*4,
-      speedX: -1 + Math.random()*2,
-      color: colors[Math.floor(Math.random()*colors.length)]
-    });
-  }
-}
-
-function drawConfetti(){
-  confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-  for(let i=0;i<pieces.length;i++){
-    const p = pieces[i];
-    confettiCtx.save();
-    confettiCtx.translate(p.x, p.y);
-    confettiCtx.rotate(p.rotation * Math.PI/180);
-    confettiCtx.fillStyle = p.color;
-    confettiCtx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
-    confettiCtx.restore();
-  }
-}
-function updateConfetti(){
-  for(let i=0;i<pieces.length;i++){
-    const p = pieces[i];
-    p.y += p.speedY;
-    p.x += p.speedX;
-    p.rotation += 6;
-    if(p.y > confettiCanvas.height + 50){
-      p.y = -20;
-      p.x = Math.random()*confettiCanvas.width;
-    }
-  }
-}
-function loopConfetti(){
-  drawConfetti();
-  updateConfetti();
-  rafId = requestAnimationFrame(loopConfetti);
-}
-function startConfetti(){
-  if(running) return;
-  running = true;
-  spawnConfetti();
-  loopConfetti();
-  setTimeout(stopConfetti, 7000);
-}
-function stopConfetti(){
-  running = false;
-  if(rafId) cancelAnimationFrame(rafId);
-  confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-}
-
-/* bank button: open whatsapp w/ exact message like image instructs */
-bankBtn.addEventListener('click', ()=>{
-  const msg = encodeURIComponent("Hi, I want to receive my prize amount ₹1996. Please assist. - Mahalaxmi");
-  window.open(`https://wa.me/919142304374?text=${msg}`,'_blank');
-});
-
-/* initialize sizes and overlay */
-function init(){
-  fitCanvases();
-  // ensure high DPI crispness
-  const ratio = window.devicePixelRatio || 1;
-  // already sized; drawOverlay called in fitCanvases
-}
-init();
-</script>
-
-</body>
-</html>
+<!-- TOP HEADER -->
+<div class="header">
+    <img src="https://i.ibb.co/7t3nq0J/flipkart-logo.png" alt="">
+    <span>Explore Plu
